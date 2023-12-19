@@ -1,0 +1,4 @@
+common-401-message: "When user isn't authenticated."
+common-403-message: "When user hasn't access to current resource."
+common-5xx-message: "When server error happened."
+resource:
