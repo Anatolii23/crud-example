@@ -3,6 +3,7 @@ package com.plant.data.entity.plant;
 import com.plant.common.enums.Continent;
 import com.plant.data.entity.CreatedDateAuditedEntity;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 @Entity
 @Table
+@Where(clause = "removed_at IS NULL")
 public class Plant extends CreatedDateAuditedEntity {
 
     @Id

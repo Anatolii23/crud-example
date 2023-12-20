@@ -18,3 +18,8 @@ resources:
       description: 'Update Plant'
       response:
         ok: 'When plant was successfully updated.'
+    delete:
+      summary: 'Delete plant.'
+      description: 'Delete Plant'
+      response:
+        ok: 'When plant was successfully deleted.'

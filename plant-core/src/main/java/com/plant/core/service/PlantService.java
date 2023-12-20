@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
+import static com.plant.common.utils.DateTimeUtil.nowLocalDateTime;
 import static com.plant.common.utils.ExceptionThrower.throwsIf;
 
 /**
@@ -65,6 +66,18 @@ public class PlantService {
         throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
         var plant = PlantConverter.toPlant(plantBO);
         return PlantConverter.toPlantBO(plantRepository.save(plant));
+    }
+
+    /**
+     * Delete plant entity.
+     *
+     * @param plantId {@link UUID}
+     * @throws PlantNotFoundException   when plant not found
+     */
+    @Transactional
+    public void deletePlant(UUID plantId) throws PlantNotFoundException {
+        throwsIf(isExists(plantId), PlantNotFoundException::new);
+        plantRepository.removeById(plantId, nowLocalDateTime());
     }
 
     /* Private methods */
