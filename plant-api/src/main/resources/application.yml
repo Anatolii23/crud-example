@@ -29,7 +29,6 @@ spring:
             non_contextual_creation: true
     open-in-view: false
   main:
-    allow-circular-references: true
     allow-bean-definition-overriding: true
   profiles:
     active: local
@@ -43,17 +42,20 @@ spring:
 #Logging configuration
 logging:
   level:
+    org:
+      hibernate:
+        SQL: DEBUG
     com:
-      auth: ${logging-level}
+      pant: ${logging-level}
   pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){cyan} %highlight(${LOG_LEVEL_PATTERN:-%6p}) %clr(:){faint} %green(%X{requestId}) %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %green(%X{requestId}) %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
 logging-level: DEBUG
 
 #Server configuration
 server:
   port: 8081
   servlet:
-    context-path: /plant
+    context-path: /api
 
 #Springdoc configuration
 springdoc:
