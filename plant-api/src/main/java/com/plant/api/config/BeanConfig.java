@@ -23,9 +23,9 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
  * @author Anatolii Hamza
  */
 @Configuration
-@EntityScan(basePackages = "com.playground.data.entity")
+@EntityScan(basePackages = "com.plant.data.entity")
 @EnableJpaAuditing
-@EnableJpaRepositories("com.playground.data.repository")
+@EnableJpaRepositories("com.plant.data.repository")
 public class BeanConfig {
 
     @Value("${spring.jpa.properties.hibernate.default_schema}")

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 docker run -d -t -i \
---network postgresql \
+--network postgresql3 \
 -e DB_HOST=postgres-plant-library \
 -e DB_PORT=5432 \
 -e DB_NAME=plant-library \

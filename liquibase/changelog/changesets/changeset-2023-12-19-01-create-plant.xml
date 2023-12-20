@@ -38,4 +38,12 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="3" author="ahamza">
+        <addColumn tableName="plant">
+            <column name="created_at" type="${type.timestamp}"/>
+        </addColumn>
+        <addColumn tableName="plant">
+            <column name="removed_at" type="${type.timestamp}"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
