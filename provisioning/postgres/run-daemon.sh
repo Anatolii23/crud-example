@@ -8,5 +8,5 @@ docker run \
     -e POSTGRES_DB=plant-library \
     -e POSTGRES_SCHEMA=plant \
     -p 5432:5432 \
-    -v ~/docker_volumes/postgis-data:/var/lib/postgresql/data \
+    -v ~/docker_volumes/postgres-data:/var/lib/postgresql/data \
     -d -t -i --name postgres postgres
