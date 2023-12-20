@@ -73,9 +73,11 @@ public class PlantController {
             @ApiResponse(responseCode = "5xx", description = "${common-5xx-message}",
                     content = @Content(schema = @Schema(implementation = ServiceResponseBody.class)))
     })
-    @PutMapping("plantId")
+    @PutMapping("/plantId")
     public PlantResponse update(@PathVariable UUID plantId,
-                                @RequestBody @Valid PlantRequest request) throws ServiceException {
+                                @RequestBody @Valid PlantRequest request)
+            throws ServiceException {
+
         return toPlantResponse(plantService.updatePlant(toPlantBO(request, plantId)));
     }
 }

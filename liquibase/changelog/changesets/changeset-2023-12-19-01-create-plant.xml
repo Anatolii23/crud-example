@@ -33,9 +33,7 @@
             <column name="plant_id" type="${type.uuid}">
                 <constraints foreignKeyName="fk_plant_id" references="plant(plant_id)"/>
             </column>
-            <column name="continent" type="${type.string}">
-            <constraints primaryKey="true" uniqueConstraintName="unique_plant_continent"/>
-            </column>
+            <column name="continent" type="${type.string}"/>
         </createTable>
     </changeSet>
     <changeSet id="3" author="ahamza">

@@ -7,6 +7,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Plant Response.
+ *
+ * @author Anatolii Hamza
+ */
 public class PlantResponse {
 
     private UUID plantId;

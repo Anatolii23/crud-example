@@ -7,6 +7,11 @@ package com.plant.common.enums;
  */
 public enum ApplicationException {
 
+    CONSTRAINTS_VIOLATION("error_constraints_violation", "Constraints violation."),
+    INVALID_REQUEST_ARGUMENT("error_invalid_request_argument", "Invalid request argument."),
+    JSON_PROCESSING("error_json_processing", "Error during json processing."),
+    MESSAGE_NOT_READABLE("error_message_not_readable", "Incorrect request fields or values."),
+    METHOD_ARGUMENT_NOT_VALID("error_method_argument_not_valid", "Method arguments is invalid."),
     PLANT_NOT_FOUND("error_plant_not_found", "Plant not found"),
     PLANT_NAME_EXISTS("error_plant_name_exist", "Plant name is exists");
 

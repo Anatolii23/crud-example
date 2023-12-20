@@ -13,3 +13,8 @@ resources:
       description: 'Get plant by id'
       response:
         ok: 'When plant was successfully fetched.'
+    update:
+      summary: 'Update plant.'
+      description: 'Update Plant'
+      response:
+        ok: 'When plant was successfully updated.'

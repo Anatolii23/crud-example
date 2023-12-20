@@ -5,6 +5,11 @@ import com.plant.common.enums.Continent;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Plant Request.
+ *
+ * @author Anatolii Hamza
+ */
 public class PlantRequest {
 
     private String name;

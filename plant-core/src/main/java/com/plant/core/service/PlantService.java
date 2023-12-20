@@ -8,6 +8,7 @@ import com.plant.data.entity.plant.Plant;
 import com.plant.data.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -31,6 +32,7 @@ public class PlantService {
      * @return {@link PlantBO}
      * @throws PlantNotFoundException when plant not found
      */
+    @Transactional(readOnly = true)
     public PlantBO getPlant(UUID plantId) throws PlantNotFoundException {
         return PlantConverter.toPlantBO(getPlantEntity(plantId));
     }
@@ -42,6 +44,7 @@ public class PlantService {
      * @return {@link PlantBO}
      * @throws PlantNameExistsException when plant name already exist
      */
+    @Transactional
     public PlantBO createPlant(PlantBO plantBO) throws PlantNameExistsException {
         throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
         var plant = PlantConverter.toPlant(plantBO);
@@ -56,6 +59,7 @@ public class PlantService {
      * @throws PlantNotFoundException   when plant not found
      * @throws PlantNameExistsException when plant not found
      */
+    @Transactional
     public PlantBO updatePlant(PlantBO plantBO) throws PlantNameExistsException, PlantNotFoundException {
         throwsIf(isExists(plantBO.getPlantId()), PlantNotFoundException::new);
         throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
