@@ -40,9 +40,24 @@ public class PlantService {
      *
      * @param plantBO {@link PlantBO}
      * @return {@link PlantBO}
-     * @throws PlantNameExistsException when plant not found
+     * @throws PlantNameExistsException when plant name already exist
      */
     public PlantBO createPlant(PlantBO plantBO) throws PlantNameExistsException {
+        throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
+        var plant = PlantConverter.toPlant(plantBO);
+        return PlantConverter.toPlantBO(plantRepository.save(plant));
+    }
+
+    /**
+     * Update plant entity.
+     *
+     * @param plantBO {@link PlantBO}
+     * @return {@link PlantBO}
+     * @throws PlantNotFoundException   when plant not found
+     * @throws PlantNameExistsException when plant not found
+     */
+    public PlantBO updatePlant(PlantBO plantBO) throws PlantNameExistsException, PlantNotFoundException {
+        throwsIf(isExists(plantBO.getPlantId()), PlantNotFoundException::new);
         throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
         var plant = PlantConverter.toPlant(plantBO);
         return PlantConverter.toPlantBO(plantRepository.save(plant));
@@ -69,5 +84,15 @@ public class PlantService {
      */
     private boolean isNameExists(String name) {
         return plantRepository.existsByNameIgnoreCase(name);
+    }
+
+    /**
+     * Check for exist by id.
+     *
+     * @param plantId {@link UUID}
+     * @return true if exist
+     */
+    private boolean isExists(UUID plantId) {
+        return plantRepository.existsById(plantId);
     }
 }

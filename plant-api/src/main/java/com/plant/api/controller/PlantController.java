@@ -15,9 +15,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 import static com.plant.api.converter.PlantConverter.toPlantBO;
@@ -58,7 +61,21 @@ public class PlantController {
                     content = @Content(schema = @Schema(implementation = ServiceResponseBody.class)))
     })
     @PostMapping
-    public PlantResponse create(@PathVariable PlantRequest request) throws ServiceException {
+    public PlantResponse create(@RequestBody @Valid PlantRequest request) throws ServiceException {
         return toPlantResponse(plantService.createPlant(toPlantBO(request)));
+    }
+
+    @Operation(summary = "${resources.plants.update.summary}",
+            description = "${resources.plants.update.description}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "${resources.plants.update.response.ok}",
+                    content = @Content(schema = @Schema(implementation = PlantResponse.class))),
+            @ApiResponse(responseCode = "5xx", description = "${common-5xx-message}",
+                    content = @Content(schema = @Schema(implementation = ServiceResponseBody.class)))
+    })
+    @PutMapping("plantId")
+    public PlantResponse update(@PathVariable UUID plantId,
+                                @RequestBody @Valid PlantRequest request) throws ServiceException {
+        return toPlantResponse(plantService.updatePlant(toPlantBO(request, plantId)));
     }
 }

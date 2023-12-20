@@ -4,6 +4,8 @@ import com.plant.api.model.plant.PlantRequest;
 import com.plant.api.model.plant.PlantResponse;
 import com.plant.core.model.PlantBO;
 
+import java.util.UUID;
+
 /**
  * Plant Converter.
  *
@@ -29,6 +31,18 @@ public final class PlantConverter {
 
     public static PlantBO toPlantBO(PlantRequest request) {
         var plantBO = new PlantBO();
+        plantBO.setDescription(request.getDescription());
+        plantBO.setFamily(request.getFamily());
+        plantBO.setGenus(request.getGenus());
+        plantBO.setName(request.getName());
+        plantBO.setSpecies(request.getSpecies());
+        plantBO.getContinents().addAll(request.getContinents());
+        return plantBO;
+    }
+
+    public static PlantBO toPlantBO(PlantRequest request, UUID plantId) {
+        var plantBO = new PlantBO();
+        plantBO.setPlantId(plantId);
         plantBO.setDescription(request.getDescription());
         plantBO.setFamily(request.getFamily());
         plantBO.setGenus(request.getGenus());
