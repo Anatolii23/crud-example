@@ -4,7 +4,7 @@ import com.plant.api.model.plant.PlantRequest;
 import com.plant.api.model.plant.PlantResponse;
 import com.plant.common.model.ServiceException;
 import com.plant.common.model.ServiceResponseBody;
-import con.plant.core.service.PlantService;
+import com.plant.core.service.PlantService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

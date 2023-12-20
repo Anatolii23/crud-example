@@ -1,4 +1,4 @@
-package con.plant.core.exception;
+package com.plant.core.exception;
 
 import com.plant.common.model.ServiceException;
 import org.springframework.http.HttpStatus;

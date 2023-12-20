@@ -2,7 +2,7 @@ package com.plant.api.converter;
 
 import com.plant.api.model.plant.PlantRequest;
 import com.plant.api.model.plant.PlantResponse;
-import con.plant.core.model.PlantBO;
+import com.plant.core.model.PlantBO;
 
 /**
  * Plant Converter.

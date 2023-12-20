@@ -1,18 +1,17 @@
-package con.plant.core.service;
+package com.plant.core.service;
 
+import com.plant.core.converter.PlantConverter;
+import com.plant.core.exception.PlantNameExistsException;
+import com.plant.core.exception.PlantNotFoundException;
+import com.plant.core.model.PlantBO;
 import com.plant.data.entity.plant.Plant;
 import com.plant.data.repository.PlantRepository;
-import con.plant.core.exception.PlantNameExistsException;
-import con.plant.core.exception.PlantNotFoundException;
-import con.plant.core.model.PlantBO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 import static com.plant.common.utils.ExceptionThrower.throwsIf;
-import static con.plant.core.converter.PlantConverter.toPlant;
-import static con.plant.core.converter.PlantConverter.toPlantBO;
 
 /**
  * Plant Service.
@@ -33,7 +32,7 @@ public class PlantService {
      * @throws PlantNotFoundException when plant not found
      */
     public PlantBO getPlant(UUID plantId) throws PlantNotFoundException {
-        return toPlantBO(getPlantEntity(plantId));
+        return PlantConverter.toPlantBO(getPlantEntity(plantId));
     }
 
     /**
@@ -45,8 +44,8 @@ public class PlantService {
      */
     public PlantBO createPlant(PlantBO plantBO) throws PlantNameExistsException {
         throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
-        var plant = toPlant(plantBO);
-        return toPlantBO(plantRepository.save(plant));
+        var plant = PlantConverter.toPlant(plantBO);
+        return PlantConverter.toPlantBO(plantRepository.save(plant));
     }
 
     /* Private methods */

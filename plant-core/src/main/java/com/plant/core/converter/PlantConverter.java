@@ -1,7 +1,7 @@
-package con.plant.core.converter;
+package com.plant.core.converter;
 
+import com.plant.core.model.PlantBO;
 import com.plant.data.entity.plant.Plant;
-import con.plant.core.model.PlantBO;
 
 /**
  * Plant Converter.

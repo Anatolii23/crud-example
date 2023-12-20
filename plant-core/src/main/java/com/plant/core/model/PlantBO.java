@@ -1,4 +1,4 @@
-package con.plant.core.model;
+package com.plant.core.model;
 
 import com.plant.common.enums.Continent;
 
