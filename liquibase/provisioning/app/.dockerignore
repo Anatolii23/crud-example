@@ -1,0 +1,12 @@
+.dockerignore
+.vscode
+
+#provisioning for additional services
+liquibase
+provisioning
+
+#github
+.git
+.github
+.gitignore
+README.md

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="ahamza">
+        <createTable tableName="plant">
+            <column name="plant_id" type="${type.uuid}">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="${type.string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="${type.string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="species" type="${type.string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="family" type="${type.string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genus" type="${type.string}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="ahamza">
+        <createTable tableName="plant_continents">
+            <column name="plant_id" type="${type.uuid}">
+                <constraints foreignKeyName="fk_plant_id" references="plant(plant_id)"/>
+            </column>
+            <column name="continent" type="${type.string}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="ahamza">
+        <addColumn tableName="plant">
+            <column name="created_at" type="${type.timestamp}"/>
+        </addColumn>
+        <addColumn tableName="plant">
+            <column name="removed_at" type="${type.timestamp}"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

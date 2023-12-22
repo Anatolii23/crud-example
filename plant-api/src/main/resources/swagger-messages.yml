@@ -1,0 +1,25 @@
+common-401-message: "When user isn't authenticated."
+common-403-message: "When user hasn't access to current resource."
+common-5xx-message: "When server error happened."
+resources:
+  plants:
+    create:
+      summary: 'Create new plant.'
+      description: 'Create new plant.'
+      response:
+        ok: 'When plant was successfully created.'
+    get:
+      summary: 'Get plant.'
+      description: 'Get plant by id'
+      response:
+        ok: 'When plant was successfully fetched.'
+    update:
+      summary: 'Update plant.'
+      description: 'Update Plant'
+      response:
+        ok: 'When plant was successfully updated.'
+    delete:
+      summary: 'Delete plant.'
+      description: 'Delete Plant'
+      response:
+        ok: 'When plant was successfully deleted.'
