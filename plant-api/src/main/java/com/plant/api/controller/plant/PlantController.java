@@ -1,4 +1,4 @@
-package com.plant.api.controller;
+package com.plant.api.controller.plant;
 
 import com.plant.api.handler.validation.SkipLimit;
 import com.plant.api.model.plant.PlantRequest;

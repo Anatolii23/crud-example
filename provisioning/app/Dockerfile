@@ -27,4 +27,4 @@ ENTRYPOINT echo java -jar "-Dspring.datasource.url=jdbc:postgresql://$DB_HOST:$D
                         "-Dspring.datasource.username=$DB_USERNAME" \
                         "-Dspring.datasource.password=$DB_PASSWORD" \
                         "-Dspring.profiles.active=$PROFILE" \
-                        /app/playground.jar
+                        /app/plant-library.jar
