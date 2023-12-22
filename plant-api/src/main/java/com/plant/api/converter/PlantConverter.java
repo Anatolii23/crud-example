@@ -4,6 +4,7 @@ import com.plant.api.model.plant.PlantRequest;
 import com.plant.api.model.plant.PlantResponse;
 import com.plant.core.model.PlantBO;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -50,5 +51,9 @@ public final class PlantConverter {
         plantBO.setSpecies(request.getSpecies());
         plantBO.getContinents().addAll(request.getContinents());
         return plantBO;
+    }
+
+    public static List<PlantResponse> toPlantResponses(List<PlantBO> plantBOs) {
+        return plantBOs.stream().map(PlantConverter::toPlantResponse).toList();
     }
 }

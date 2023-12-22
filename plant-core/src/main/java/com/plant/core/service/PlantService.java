@@ -1,12 +1,15 @@
 package com.plant.core.service;
 
-import com.plant.core.converter.PlantConverter;
+import com.plant.common.model.PageContainer;
+import com.plant.common.model.PageRequestBO;
 import com.plant.core.exception.PlantNameExistsException;
 import com.plant.core.exception.PlantNotFoundException;
 import com.plant.core.model.PlantBO;
+import com.plant.data.aggregator.PlantDataAggregator;
 import com.plant.data.entity.plant.Plant;
 import com.plant.data.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +17,11 @@ import java.util.UUID;
 
 import static com.plant.common.utils.DateTimeUtil.nowLocalDateTime;
 import static com.plant.common.utils.ExceptionThrower.throwsIf;
+import static com.plant.core.converter.PlantConverter.toPlant;
+import static com.plant.core.converter.PlantConverter.toPlantBO;
+import static com.plant.core.converter.PlantConverter.toPlantBOs;
+import static com.plant.core.util.PageableUtil.preparePageable;
+import static java.util.Objects.isNull;
 
 /**
  * Plant Service.
@@ -26,6 +34,9 @@ public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
+    @Autowired
+    private PlantDataAggregator aggregator;
+
     /**
      * Get plant by id.
      *
@@ -35,7 +46,7 @@ public class PlantService {
      */
     @Transactional(readOnly = true)
     public PlantBO getPlant(UUID plantId) throws PlantNotFoundException {
-        return PlantConverter.toPlantBO(getPlantEntity(plantId));
+        return toPlantBO(getPlantEntity(plantId));
     }
 
     /**
@@ -48,8 +59,8 @@ public class PlantService {
     @Transactional
     public PlantBO createPlant(PlantBO plantBO) throws PlantNameExistsException {
         throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
-        var plant = PlantConverter.toPlant(plantBO);
-        return PlantConverter.toPlantBO(plantRepository.save(plant));
+        var plant = toPlant(plantBO);
+        return toPlantBO(plantRepository.save(plant));
     }
 
     /**
@@ -62,10 +73,10 @@ public class PlantService {
      */
     @Transactional
     public PlantBO updatePlant(PlantBO plantBO) throws PlantNameExistsException, PlantNotFoundException {
-        throwsIf(isExists(plantBO.getPlantId()), PlantNotFoundException::new);
+        throwsIf(!isExists(plantBO.getPlantId()), PlantNotFoundException::new);
         throwsIf(isNameExists(plantBO.getName()), PlantNameExistsException::new);
-        var plant = PlantConverter.toPlant(plantBO);
-        return PlantConverter.toPlantBO(plantRepository.save(plant));
+        var plant = toPlant(plantBO);
+        return toPlantBO(plantRepository.save(plant));
     }
 
     /**
@@ -76,8 +87,24 @@ public class PlantService {
      */
     @Transactional
     public void deletePlant(UUID plantId) throws PlantNotFoundException {
-        throwsIf(isExists(plantId), PlantNotFoundException::new);
+        throwsIf(!isExists(plantId), PlantNotFoundException::new);
         plantRepository.removeById(plantId, nowLocalDateTime());
+    }
+
+    /**
+     * Get Plants by search.
+     *
+     * @param search        {@link String}
+     * @param pageRequestBO {@link PageRequestBO}
+     * @return {@link PageContainer} of {@link PlantBO} objects
+     */
+    @Transactional(readOnly = true)
+    public PageContainer<PlantBO> getPlants(@Nullable String search, PageRequestBO pageRequestBO) {
+        search = isNull(search) ? "" : search.toLowerCase();
+        var plantPage = plantRepository.findPlants(search, preparePageable(pageRequestBO));
+        var plants = plantPage.getContent();
+        aggregator.enrich(plants, PlantDataAggregator.PlantBuilder.getInstance().withContinents());
+        return new PageContainer<>(toPlantBOs(plants), plantPage.getTotalElements());
     }
 
     /* Private methods */
@@ -94,7 +121,7 @@ public class PlantService {
     }
 
     /**
-     * Check for exist by name.
+     * Check if it exists by name.
      *
      * @param name {@link String}
      * @return true if exist
@@ -104,7 +131,7 @@ public class PlantService {
     }
 
     /**
-     * Check for exist by id.
+     * Check if it exists by id.
      *
      * @param plantId {@link UUID}
      * @return true if exist

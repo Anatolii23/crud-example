@@ -3,6 +3,8 @@ package com.plant.core.converter;
 import com.plant.core.model.PlantBO;
 import com.plant.data.entity.plant.Plant;
 
+import java.util.List;
+
 /**
  * Plant Converter.
  *
@@ -37,5 +39,9 @@ public final class PlantConverter {
         plant.getContinents().addAll(plantBO.getContinents());
         plant.setCreatedAt(plantBO.getCreatedAt());
         return plant;
+    }
+
+    public static List<PlantBO> toPlantBOs(List<Plant> plants) {
+        return plants.stream().map(PlantConverter::toPlantBO).toList();
     }
 }

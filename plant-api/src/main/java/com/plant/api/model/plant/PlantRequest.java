@@ -2,6 +2,8 @@ package com.plant.api.model.plant;
 
 import com.plant.common.enums.Continent;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,11 +14,27 @@ import java.util.Set;
  */
 public class PlantRequest {
 
+    @Size(min = 1, max = 100)
+    @NotBlank
     private String name;
+
+    @Size(min = 1, max = 100)
+    @NotBlank
     private String species;
+
+    @Size(min = 1, max = 2000)
+    @NotBlank
     private String description;
+
+    @Size(min = 1, max = 100)
+    @NotBlank
     private String family;
+
+    @Size(min = 1, max = 100)
+    @NotBlank
     private String genus;
+
+    @Size(min = 1, max = 7)
     private final Set<Continent> continents = new HashSet<>();
 
     public String getName() {
