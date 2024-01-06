@@ -38,6 +38,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+
+        <dependency>
+        <groupId>com.github.database-rider</groupId>
+        <artifactId>rider-spring</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

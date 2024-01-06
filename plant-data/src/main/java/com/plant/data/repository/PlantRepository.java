@@ -38,7 +38,7 @@ public interface PlantRepository extends JpaRepository<Plant, UUID> {
             OR LOWER (p.genus) LIKE CONCAT('%', :search, '%')
             OR LOWER (c) LIKE CONCAT('%', :search, '%'))
             """)
-    Page<Plant> findPlants(@Param("search") String search, Pageable preparePageable);
+    Page<Plant> findPlants(@Param("search") String search, Pageable pageable);
 
     @Query("SELECT p.plantId AS plantId, c AS continent FROM Plant p JOIN p.continents c WHERE p.plantId IN :plantIds")
     Collection<PlantIdContinentProjection> getAllContinentsByPlantId(@Param("plantIds") Set<UUID> plantIds);
