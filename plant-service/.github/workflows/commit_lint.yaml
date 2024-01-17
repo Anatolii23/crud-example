@@ -1,0 +1,20 @@
+name: Commitlint
+on:
+ pull_request:
+  branches: [ develop, master ]
+  types: [ opened, edited, reopened, synchronize ]
+jobs:
+ lint:
+  runs-on: ubuntu-latest
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: 'Configure commit lint'
+      run: |
+        echo "module.exports = {extends: ['@commitlint/config-conventional'], rules: { 'subject-case': [0, 'always', ['sentence-case','lower-case', 'start-case', 'upper-case']] }};" > commitlint.config.js
+    - uses: wagoid/commitlint-github-action@v5
+      with:
+        configFile: .commitlint.config.js
