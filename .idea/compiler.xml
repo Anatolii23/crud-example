@@ -12,5 +12,8 @@
         <module name="plant-data" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="plant-library" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

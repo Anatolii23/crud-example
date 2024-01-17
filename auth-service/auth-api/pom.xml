@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>plant-library</groupId>
-        <artifactId>plant-library</artifactId>
+        <groupId>auth-service</groupId>
+        <artifactId>auth-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>plant-api</artifactId>
+    <artifactId>auth-api</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>plant-library</groupId>
-            <artifactId>plant-core</artifactId>
+            <groupId>auth-service</groupId>
+            <artifactId>auth-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

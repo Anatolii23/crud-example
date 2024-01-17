@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>plant-library</groupId>
-        <artifactId>plant-library</artifactId>
+        <groupId>plant-service</groupId>
+        <artifactId>plant-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>plant-library</groupId>
+            <groupId>plant-service</groupId>
             <artifactId>plant-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
